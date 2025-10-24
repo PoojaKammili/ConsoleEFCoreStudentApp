@@ -15,9 +15,10 @@ namespace ConsoleApp_With_EFCore
                 Console.WriteLine("1 - Add Student Details");
                 Console.WriteLine("2 - Display All Students");
                 Console.WriteLine("3 - Display Student by ID");
-                Console.WriteLine("4 - Update Student Details");
-                Console.WriteLine("5 - Delete Student");
-                Console.WriteLine("6 - Exit");
+                Console.WriteLine("4 - Display Student by Name");
+                Console.WriteLine("5 - Update Student Details");
+                Console.WriteLine("6 - Delete Student");
+                Console.WriteLine("7 - Exit");
                 Console.WriteLine("----------------------------------");
 
                 if (int.TryParse(Console.ReadLine(), out int option))
@@ -25,6 +26,7 @@ namespace ConsoleApp_With_EFCore
                     switch (option)
                     {
                         case 1:
+                            //create
                             Console.Write("Enter Name: ");
                             string name = Console.ReadLine().Trim();
                             Console.Write("Enter Age: ");
@@ -37,6 +39,7 @@ namespace ConsoleApp_With_EFCore
                             break;
 
                         case 2:
+                            //getallstudents
                             var allStudents = service.GetAllStudents();
                             if (allStudents.Count == 0)
                                 Console.WriteLine("No students found!");
@@ -46,6 +49,7 @@ namespace ConsoleApp_With_EFCore
                             break;
 
                         case 3:
+                            //getbyid
                             Console.Write("Enter Student ID: ");
                             int id = int.Parse(Console.ReadLine());
                             var studentById = service.GetStudentById(id);
@@ -54,8 +58,25 @@ namespace ConsoleApp_With_EFCore
                             else
                                 Console.WriteLine("Student not found!");
                             break;
-
                         case 4:
+                            //getbyname
+                            Console.Write("Enter Name: ");
+                            string search_name = Console.ReadLine().Trim();
+                            var students = service.GetStudentsByName(search_name);
+
+                            if (students.Count == 0)
+                            {
+                                Console.WriteLine("No student found with that name.");
+                            }
+                            else
+                            {
+                                foreach (var matchingStudents in students)
+                                {
+                                    service.Display(matchingStudents);
+                                }
+                            }
+                            break;
+                        case 5:
                             Console.Write("Enter Student ID to update: ");
                             int updateId = int.Parse(Console.ReadLine());
                             var studentToUpdate = service.GetStudentById(updateId);
@@ -94,7 +115,7 @@ namespace ConsoleApp_With_EFCore
                                 Console.WriteLine("Student not found!");
                             break;
 
-                        case 5:
+                        case 6:
                             Console.Write("Enter Student ID to delete: ");
                             int deleteId = int.Parse(Console.ReadLine());
                             var studentToDelete = service.GetStudentById(deleteId);
@@ -107,7 +128,7 @@ namespace ConsoleApp_With_EFCore
                                 Console.WriteLine("Student not found!");
                             break;
 
-                        case 6:
+                        case 7:
                             Console.WriteLine("Exited from the application.");
                             return;
 

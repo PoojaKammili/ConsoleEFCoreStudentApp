@@ -33,6 +33,14 @@ public class StudentService
         return _context.Students.FirstOrDefault(s => s.Id == id);
     }
 
+    //SEARCH BY NAME 
+    public List<Student> GetStudentsByName(string name)
+    {
+        return _context.Students
+                        .Where(s => s.Name.ToLower().Contains(name.ToLower()))
+                       .ToList();
+    }
+
     // UPDATE
     public void UpdateStudent(Student student)
     {
