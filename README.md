@@ -24,5 +24,3 @@ The app connects to a SQL Server database and performs **CRUD operations** on a 
 
 ---
 
-### 📂 Project Structure
-3617b0f38630d241d9c709daacdc5bd33fb70e85
